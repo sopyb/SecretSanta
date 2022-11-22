@@ -1,8 +1,6 @@
-//
-// Created by Sopy on 11/22/22.
-//
+#ifndef WEBSERVER_WEBSERVER_H
+#define WEBSERVER_WEBSERVER_H
 
-#ifndef SECRETSANTA_WEBSERVER_H
-#define SECRETSANTA_WEBSERVER_H
+void hello(void);
 
-#endif //SECRETSANTA_WEBSERVER_H
+#endif //WEBSERVER_WEBSERVER_H
