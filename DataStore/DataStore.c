@@ -215,6 +215,16 @@ void writeData(char* data_file, DataItem* items)
 }
 
 //
+// delete data file
+//
+void deleteData(char* data_file)
+{
+    //delete data file
+    remove(data_file);
+}
+
+
+//
 // insert key into file
 // if key exists, don't change value
 //
