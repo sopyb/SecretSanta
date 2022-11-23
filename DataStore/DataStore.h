@@ -1,7 +1,8 @@
 /*****************************************************************************\
- *  DataStore module                                                         *
- *  Copyright (C) 2022 Sopy                                                  *
- *  FILE: DataStore.h                                                        *
+ !  DataStore module                                                         !
+ !  This module is used to store and retrieve data from files.               !
+ !  Copyright (C) 2022 Sopy                                                  !
+ !  FILE: DataStore.h                                                        !
  *                                                                           *
  *  AUTHOR: Sopy <contact@sopy.one>                                          *
  *  DESCRIPTION: Header file for DataStore.c                                 *
