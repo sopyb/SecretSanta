@@ -1,10 +1,8 @@
 #include <stdio.h>
 #include <malloc.h>
 //#include "DataStore/DataStore.h"
-#include "WebServer/WebServer.h"
 
 int main() {
-    Server();
 
 //    //hacky way to define data file
 //    DataItem defaultItems[3] = {
