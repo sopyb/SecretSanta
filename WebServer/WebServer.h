@@ -1,6 +1,0 @@
-#ifndef WEBSERVER_WEBSERVER_H
-#define WEBSERVER_WEBSERVER_H
-
-void hello(void);
-
-#endif //WEBSERVER_WEBSERVER_H

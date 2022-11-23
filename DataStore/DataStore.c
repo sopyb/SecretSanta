@@ -1,12 +1,20 @@
-#include "DataStore.h"
-
+/************************************************************************\
+ !                             DataStore.c                              !
+ !                Documentation and info in DataStore.h                 !
+\************************************************************************/
+// dependencies
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
 
+// include own header
+#include "DataStore.h"
+
+// function to generate errorCodes for module
 int errorCode(int error) { return error - 10000; }
 
+// function to trim whitespace from a string
 char* trimWhiteSpace(char *string) {
     //check if string is null or empty
     if (string == NULL || strlen(string) == 0) {
@@ -217,7 +225,7 @@ void writeData(char* data_file, DataItem* items)
 //
 // delete data file
 //
-void deleteData(char* data_file)
+void dropData(char* data_file)
 {
     //delete data file
     remove(data_file);
