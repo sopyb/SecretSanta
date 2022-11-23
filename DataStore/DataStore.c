@@ -58,27 +58,38 @@ DataItem *getAllKeys(char *data_file) {
         }
 
         char *key = strtok(line, "="); //get the key
-        key = trimWhiteSpace(key); //trim the key
-        // get the value of key
-        char *value = strtok(NULL, "=");
-        // trim the whitespace
-        value = trimWhiteSpace(value);x
+        key = trimWhiteSpace(key); //trim whitespace - key
+
+        char *value = strtok(NULL, "="); // get the value of key
+        value = trimWhiteSpace(value); // trim the whitespace - value
 
         // copy the key into dataItems[i].key
         dataItems[i].key = malloc(strlen(key) + 1);
         strcpy(dataItems[i].key, key);
 
-        // copy the value into dataItems[i].key
+        // copy the value into dataItems[reali].key
         dataItems[i].value = malloc(strlen(value) + 1);
         strcpy(dataItems[i].value, value);
 
         i++;
     }
+
+    // create result array copying the dataItems array at an offset of 1
+    DataItem *result = malloc((i + 1) * sizeof(DataItem));
+
+    // allocate result[0] to hold the size of the array with key "__size__" and value int i
+    result[0].key = malloc(strlen("__size__") + 1);
+    strcpy(result[0].key, "__size__");
+    result[0].value = malloc(sizeof(int));
+    *(int *) result[0].value = i;
+
+    // copy the dataItems array into the result array
+    for (int j = 1; j <= i; j++) {
+        result[j] = dataItems[j - 1];
+    }
+
     // close the file
     fclose(fp);
-
-    // shrink the array to the correct size
-    dataItems = realloc(dataItems, sizeof(DataItem) * i);
 
     // check if there is a line
     if (line) {
@@ -87,7 +98,7 @@ DataItem *getAllKeys(char *data_file) {
     }
 
     // return the array of DataItem
-    return dataItems;
+    return result;
 }
 
 //
@@ -159,10 +170,10 @@ void initData(char* data_file, DataItem* defaultItems)
         }
 
         //write default values to data file
-        for (int i = 0; i < sizeof(defaultItems); i++)
+        for (int i = 1; i <=  *(int *) defaultItems[0].value; i++)
         {
             // append key = value to data file
-            fprintf(fp, "%s=%s", defaultItems[i].key, defaultItems[i].value);
+            fprintf(fp, "%s=%s\n", defaultItems[i].key, defaultItems[i].value);
         }
     }
 
@@ -185,25 +196,22 @@ void writeData(char* data_file, DataItem* items)
         return;
     }
 
-    //clear all data in the fp stream
-    fflush(fp);
-
     //write default values to data file
-    for (int i = 0; i < sizeof(items); i++)
+    for (int i = 1; i <= *(int *) items[0].value; i++)
     {
         // append key = value to data file
-        fprintf(fp, "%s=%s", items[i].key, items[i].value);
+        fprintf(fp, "%s=%s\n", items[i].key, items[i].value);
     }
 
     //close data file
     fclose(fp);
 }
 
-
 //
-// update key in file
+// insert key into file
+// if key exists, don't change value
 //
-void updateKey(char* key, char* value, char* data_file)
+void insertKey(char* key, char* value, char* data_file)
 {
     //open data file
     FILE* fp = fopen(data_file, "r");
@@ -217,39 +225,47 @@ void updateKey(char* key, char* value, char* data_file)
 
     char* line = NULL; //line from data file
     size_t len = 0; //length of line
-    ssize_t read; //number of bytes read
-    char* newData = NULL; //new data file
+    char* temp = NULL; //temp string
+    char* result = NULL; //result string
 
     // read each line from data file
-    while ((read = getline(&line, &len, fp)) != -1)
+    while (getline(&line, &len, fp) != -1)
     {
-        //check if line is a comment
-        if (line[0] == '#')
-        {
-            continue;
-        }
-
         //check if line is a key
         if (strstr(line, key) != NULL)
         {
-            // append key = value to new data file
-            strcat(newData, key);
-            strcat(newData, "=");
-            strcat(newData, value);
-        }
-        else
-        {
-            // append line to new data file
-            strcat(newData, line);
+            //remove everything before the =
+            temp = strstr(line, "=");
+            //remove the = and whitespace
+            result = trimWhiteSpace(temp + 1);
+
+            break;
         }
     }
 
-    fclose(fp);
-    if (line)
-        free(line);
+    //check if key exists
+    if (result == NULL)
+    {
+        //reopen data file
+        freopen(data_file, "a", fp);
 
+        //append key = value to data file
+        fprintf(fp, "%s=%s\n", key, value);
+
+        //close data file
+        fclose(fp);
+    }
+}
+
+//
+// update key in file
+// if key doesn't exist, create it
+//
+void updateKey(char* key, char* value, char* data_file)
+{
+    int updated = 0; //check if key is updated
     //open data file
-    fp = fopen(data_file, "w");
+    FILE* fp = fopen(data_file, "r");
 
     //check if file is open
     if (fp == NULL)
@@ -258,9 +274,107 @@ void updateKey(char* key, char* value, char* data_file)
         return;
     }
 
-    //write new data file to data file
-    fprintf(fp, "%s", newData);
+    //create temp file stream in memory
+    FILE* temp = tmpfile();
 
-    //close data file
+    //check if file is open
+    if (temp == NULL)
+    {
+        printf("Error: Cannot create temp file");
+        return;
+    }
+
+    //read each line from data file
+    char* line = NULL;
+    size_t len = 0;
+
+    while (getline(&line, &len, fp) != -1)
+    {
+        //check if line is a key
+        if (strstr(line, key) != NULL)
+        {
+            fprintf(temp, "%s=%s\n", key, value);
+            updated = 1;
+        }
+        else
+        {
+            //write line to temp file
+            fprintf(temp, "%s", line);
+        }
+    }
+
+    if(!updated)
+    {
+        fprintf(temp, "%s=%s\n", key, value);
+    }
+
+    line = NULL;
+    len = 0;
+
+    //reopen data file
+    freopen(data_file, "w", fp);
+
+    //write temp file to datafile path
+    rewind(temp);
+    while (getline(&line, &len, temp) != -1)
+    {
+        fprintf(fp, "%s", line);
+    }
+
+    //close files
     fclose(fp);
+    fclose(temp);
+}
+
+//
+// remove key from data file
+//
+void deleteKey(char* key, char* data_file) {
+    //open data file
+    FILE* fp = fopen(data_file, "r");
+
+    //check if file is open
+    if (fp == NULL)
+    {
+        printf("Error: Cannot open data file %s", data_file);
+        return;
+    }
+
+    //create temp file stream in memory
+    FILE* temp = tmpfile();
+
+    //check if file is open
+    if (temp == NULL)
+    {
+        printf("Error: Cannot create temp file");
+        return;
+    }
+
+    //read each line from data file
+    char* line = NULL;
+    size_t len = 0;
+
+    while (getline(&line, &len, fp) != -1)
+    {
+        //check if line is a key
+        if (strstr(line, key) == NULL)
+        {
+            //write line to temp file
+            fprintf(temp, "%s", line);
+        }
+    }
+
+    //reopen data file
+    freopen(data_file, "w", fp);
+
+    //write temp file to datafile path
+    rewind(temp);
+    while (getline(&line, &len, temp) != -1)
+    {
+        fprintf(fp, "%s", line);
+    }
+
+    //close files
+    fclose(fp);
+    fclose(temp);
 }

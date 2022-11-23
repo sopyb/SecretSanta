@@ -10,8 +10,10 @@ typedef struct {
 // function prototypes
 DataItem *getAllKeys(char *data_file);
 char* getKey(char* key, char* data_file);
-void initData(char* data_file, DataItem* defaultItems); // not tested
-void writeData(char* data_file, DataItem* items); // not tested
-void updateKey(char* key, char* value, char* data_file); // not tested
+void initData(char* data_file, DataItem* defaultItems);
+void writeData(char* data_file, DataItem* items);
+void insertKey(char* key, char* value, char* data_file);
+void updateKey(char* key, char* value, char* data_file);
+void deleteKey(char* key, char* data_file);
 
 #endif //CONFIGMANAGER_DATASTORE_H
