@@ -137,10 +137,17 @@ char* getKey(char* key, char* data_file)
 
     fclose(fp);
 
-    //allocate memory for value
-    char* result = malloc(sizeof(char) * strlen(value));
-    //copy value to result
-    strcpy(result, value);
+    char* result;
+    //check if value is null
+    if (value == NULL)
+    {
+        result = NULL;
+    } else {
+        //allocate memory for value
+        result = malloc(sizeof(char) * strlen(value));
+        //copy value to result
+        strcpy(result, value);
+    }
 
     if (line)
         free(line);
