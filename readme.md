@@ -8,6 +8,7 @@ The process is as follows:
  - The admin executes the randomizer
  - Each user can log in and see who they have been assigned to
 
+*oh btw this is a school project*
 ## How do I build this and use this?
 * I am a linux nerd so here's the linux tutorial
 ```bash
