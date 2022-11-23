@@ -12,7 +12,7 @@
  *  CREATED: 2022-11-22                                                      *
  *  MODIFIED: 2022-11-23                                                     *
  *  VERSION: 1.0.0                                                           *
- *  NOTES: Why do I always overcomplicate stuff?                             *
+ ?  NOTES: Why do I always overcomplicate stuff?                             ?
 \*****************************************************************************/
 
 #ifndef CONFIGMANAGER_DATASTORE_H
