@@ -19,7 +19,7 @@
 #define PASSWORDMANAGER_PASSWORDMANAGER_H
 
 void registerPassword(char* user, char* password);
-void checkPassword(char* user, char* password);
+int checkPassword(char* user, char* password);
 void changePassword(char* user, char* oldPassword, char* newPassword);
 
 #endif //PASSWORDMANAGER_PASSWORDMANAGER_H
