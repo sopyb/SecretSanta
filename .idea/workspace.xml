@@ -22,9 +22,7 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1883e2ef-0d40-4103-a978-8fef37ee4253" name="Changes" comment="&gt;.&gt; didn't forget to do this before last commit">
-      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
-    </list>
+    <list default="true" id="1883e2ef-0d40-4103-a978-8fef37ee4253" name="Changes" comment=".gitignore changes" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -122,7 +120,7 @@
       <workItem from="1669212819835" duration="2943000" />
       <workItem from="1669215774254" duration="11936000" />
       <workItem from="1669227720840" duration="1104000" />
-      <workItem from="1669228865118" duration="979000" />
+      <workItem from="1669228865118" duration="1351000" />
     </task>
     <task id="LOCAL-00001" summary="Initial Commit">
       <created>1669103738459</created>
@@ -187,7 +185,21 @@
       <option name="project" value="LOCAL" />
       <updated>1669228620086</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="&gt;.&gt; didn't forget to do this before last commit">
+      <created>1669229875807</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1669229875807</updated>
+    </task>
+    <task id="LOCAL-00011" summary=".gitignore changes">
+      <created>1669230140897</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1669230140897</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -217,6 +229,7 @@
     <MESSAGE value="DataStore - deleteData renamed to dropData + copyright and stuff" />
     <MESSAGE value="DataStore - adding description of module to DataStore.h" />
     <MESSAGE value="&gt;.&gt; didn't forget to do this before last commit" />
-    <option name="LAST_COMMIT_MESSAGE" value="&gt;.&gt; didn't forget to do this before last commit" />
+    <MESSAGE value=".gitignore changes" />
+    <option name="LAST_COMMIT_MESSAGE" value=".gitignore changes" />
   </component>
 </project>
