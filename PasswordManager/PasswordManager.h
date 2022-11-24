@@ -11,17 +11,16 @@
  *                                                                           *
  *  CREATED: 2022-11-23                                                      *
  *  MODIFIED: 2022-11-24                                                     *
- *  VERSION: 1.0.0                                                           *
+ *  VERSION: 1.1.0                                                           *
  ?  NOTES: I didn't overcomplicate this one, but I still think it's pretty   ?
  ?         cool.                                                             ?
- !  TODO: Check if any of this actually works.                               !
 \*****************************************************************************/
 
 #ifndef PASSWORDMANAGER_PASSWORDMANAGER_H
 #define PASSWORDMANAGER_PASSWORDMANAGER_H
 
-void registerPassword(char *user, char *password);
+int registerPassword(char *user, char *password);
 int checkPassword(char *user, char *password);
-void changePassword(char *user, char *oldPassword, char *newPassword);
+int changePassword(char *user, char *oldPassword, char *newPassword);
 
 #endif //PASSWORDMANAGER_PASSWORDMANAGER_H
