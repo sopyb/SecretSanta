@@ -18,6 +18,7 @@
 #ifndef PASSWORDMANAGER_PASSWORDMANAGER_H
 #define PASSWORDMANAGER_PASSWORDMANAGER_H
 
+char *base64(char* string);
 void registerPassword(char *user, char *password);
 int checkPassword(char *user, char *password);
 void changePassword(char *user, char *oldPassword, char *newPassword);
