@@ -13,5 +13,5 @@ link_libraries(PasswordManager)
 link_libraries(UserInterface)
 
 # build SecretSanta as an executable including the libraries
-add_executable(SecretSanta main.c)
+add_executable(SecretSanta main.c colors.h)
 
