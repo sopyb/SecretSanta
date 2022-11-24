@@ -1,3 +1,8 @@
+/*********************************************************************\
+ !                         PasswordManager.c                         !
+ !            Check the header file for more information.            !
+\*********************************************************************/
+
 // Dependencies
 #include <stdio.h>
 #include <string.h>
