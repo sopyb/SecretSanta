@@ -59,13 +59,28 @@ char *base64(char *string) {
   return res;
 }
 
+DataItem *defaultUserData() {
+  DataItem data[] = {
+	  {"__SIZE__", malloc(sizeof(int))},
+	  {"Name", "unknown"},
+	  {"GiftTo", "undefined"},
+	  {"Location", "Not set"}
+  };
+  *(int *) data[0].value = 3;
+
+  return data;
+}
+
 //
 // register an account with password
 //
 int registerPassword(char *user, char *password) {
 
   //check if user exists or user == "admin"
-  if (getKey(user, PASS_FILE) != NULL || strcmp(user, "admin") == 0) {
+  if (getKey(user, PASS_FILE) != NULL
+	  || strcmp(user, "admin") == 0
+	  || strcmp(user, "unknown") == 0
+	  || strcmp(user, "undefined") == 0) {
 	printf("Username already exists or is reserved!\n");
 	return 0;
   }
@@ -98,6 +113,18 @@ int registerPassword(char *user, char *password) {
 
   //store password
   insertKey(user, password, PASS_FILE);
+
+  //create user data
+  DataItem *data = defaultUserData();
+
+  // define file name ./data/participants/$user.txt
+  char *file = malloc(strlen(user) + 20);
+  strcpy(file, "./data/participants/");
+  strcat(file, user);
+  strcat(file, ".txt");
+
+  // store data
+  initData(file, data);
 
   return 1;
 }
@@ -169,6 +196,30 @@ int changePassword(char *user, char *oldPassword, char *newPassword) {
 	// else change user password
 	updateKey(user, newPassword, PASS_FILE);
   }
+
+  return 1;
+}
+
+// ! SHOULD  ONLY BE CALLED BY AUTHENTICATED USERS ON THEIR OWN ACCOUNTS
+// ! OR BY THE ADMIN USER
+int deleteUser(char *user) {
+  //check if user exists
+  if (getKey(user, PASS_FILE) == NULL) {
+	printf("Username does not exist!\n");
+	return 0;
+  }
+
+  //delete user
+  deleteKey(user, PASS_FILE);
+
+  // define file name ./data/participants/$user.txt
+  char *file = malloc(strlen(user) + 20);
+  strcpy(file, "./data/participants/");
+  strcat(file, user);
+  strcat(file, ".txt");
+
+  // delete data
+  dropData(file);
 
   return 1;
 }

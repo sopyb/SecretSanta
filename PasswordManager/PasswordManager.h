@@ -11,7 +11,7 @@
  *                                                                           *
  *  CREATED: 2022-11-23                                                      *
  *  MODIFIED: 2022-11-24                                                     *
- *  VERSION: 1.1.0                                                           *
+ *  VERSION: 1.2.0                                                           *
  ?  NOTES: I didn't overcomplicate this one, but I still think it's pretty   ?
  ?         cool.                                                             ?
 \*****************************************************************************/
@@ -22,5 +22,6 @@
 int registerPassword(char *user, char *password);
 int checkPassword(char *user, char *password);
 int changePassword(char *user, char *oldPassword, char *newPassword);
+int deleteUser(char *user);
 
 #endif //PASSWORDMANAGER_PASSWORDMANAGER_H

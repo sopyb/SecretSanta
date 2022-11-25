@@ -38,10 +38,11 @@ void onInit() {
   DataItem defaultConfig[] = {
 	  {"__SIZE__", malloc(sizeof(int))},
 	  {"admin_pass", "YWRtaW4="}, // admin
-	  {"budget", "10"},
-	  {"currency", "EUR"}
+	  {"event_phase", "register"}, // stores event status
+	  {"budget", "10"}, // set budget for gifts
+	  {"currency", "EUR"} // currency for budget
   };
-  *(int *) defaultConfig[0].value = 3;
+  *(int *) defaultConfig[0].value = 4;
 
   initData(CONF_FILE, defaultConfig);
 
