@@ -86,7 +86,7 @@ void run() {
 
 	// get input
 	char input[2];
-	scanf("%s", input);
+	scanf("%1s", input);
 	if (strcmp(input, "0") == 0)
 	  // exit
 	  break;
