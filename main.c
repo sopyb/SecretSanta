@@ -50,7 +50,7 @@ void onInit() {
 
 
   #if defined(_WIN32)
-	mkdirat("./data");
+	mkdir("./data");
 	mkdir("./data/participants");
   #else
 	mkdir("./data", 0777);

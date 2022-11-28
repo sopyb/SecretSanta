@@ -3,7 +3,7 @@ project(ConfigManager C)
 
 set(CMAKE_C_STANDARD 99)
 
-add_library(DataStore DataStore.c)
+add_library(DataStore DataStore.c  getline.c)
 set_target_properties(DataStore PROPERTIES PUBLIC_HEADER DataStore.h)
 # export the target
 install(TARGETS DataStore
