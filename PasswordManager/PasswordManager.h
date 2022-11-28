@@ -1,6 +1,6 @@
 /*****************************************************************************\
  !  DataStore module                                                         !
- !  This module is used to store and retrieve data from files.               !
+ !  This module is used to manage users' passwords.                          !
  !  Copyright (C) 2022 Sopy                                                  !
  !  FILE: PasswordManager.h                                                  !
  *                                                                           *
