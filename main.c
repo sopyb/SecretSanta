@@ -47,8 +47,15 @@ void onInit() {
   initData(CONF_FILE, defaultConfig);
 
   //setup folder structures
-  mkdir("./data", 0777);
-  mkdir("./data/participants", 0777);
+
+
+  #if defined(_WIN32)
+	mkdirat("./data");
+	mkdir("./data/participants");
+  #else
+	mkdir("./data", 0777);
+	mkdir("./data/participants", 0777);
+  #endif
 
   // create password file
   FILE *passFile;
