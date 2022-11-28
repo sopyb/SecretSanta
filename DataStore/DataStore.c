@@ -7,6 +7,10 @@
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
+// windows specific
+#ifdef _WIN32
+#include "./getline.c"
+#endif
 
 // include own header
 #include "DataStore.h"
