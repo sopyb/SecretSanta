@@ -1,0 +1,2 @@
+# set ./DataStore/getline.c as vendored for linguist
+DataStore/getline.c linguist-vendored
