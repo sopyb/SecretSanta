@@ -10,6 +10,8 @@
 #include <stdlib.h>
 #include <time.h>
 
+#include "../../PasswordManager/PasswordManager.h"
+
 // corresponding header
 #include "AdminInteraction.h"
 
@@ -17,15 +19,14 @@
 void adminLogin() {
     char login_password[25]; // the input password
     printf("Type the admin password:\n");
-    scanf(" ");
+
+    // seek to end of input buffer
+    fseek(stdin, 0, SEEK_END);
+
+    scanf("%24s", login_password);
     gets(login_password);
-    while (strcmp(login_password, "1234") != 0 && strcmp(login_password, "0") != 0) {
-        // checking is the password is correct or the login is cancelled
-        printf("Wrong password! Try again, or type 0 to cancel\n");
-        scanf(" ");
-        gets(login_password);
-    }
-    if (strcmp(login_password, "0") != 0) {
+
+    if (checkPassword("admin", login_password)) {
         // the user proceeds to do their admin activities
         adminActivities();
     }
