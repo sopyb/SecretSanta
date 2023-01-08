@@ -64,7 +64,9 @@ DataItem *defaultUserData() {
 	  {"__SIZE__", malloc(sizeof(int))},
 	  {"Name", "unknown"},
 	  {"GiftTo", "undefined"},
-	  {"Location", "Not set"}
+	  {"Wishlist", "Not set"},
+      {"", ""}
+
   };
   *(int *) data[0].value = 3;
 

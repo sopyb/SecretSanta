@@ -8,6 +8,8 @@
 #include <string.h>
 #include <stdbool.h>
 
+#include "../../PasswordManager/PasswordManager.h"
+
 // corresponding header
 #include "UserInteraction.h"
 
@@ -106,45 +108,16 @@ void participantLogin() {
     char login_password[25]; // the input password
 
     printf("Type your username:\n");
-    scanf(" ");
+
+    // seek to the end of the input buffer
+    fseek(stdin, 0, SEEK_END);
+    scanf("%24s", login_username);
+
     gets(login_username);
 
-    // the input username is compared to the ones of existing users to make sure the profile exists
-    bool found = false;
-    while (!found && strcmp(login_username,"0") != 0) {
-        // looping until a matching username is found or the login is cancelled
-        int i = 0;
-        for (i = 0; i < participant_count && !found; i++) {
-            if (strcmp(participants[i].username, login_username) == 0) {
-                found = true;
-                login_id = i; // the ID of the matching user is stored for later
-            }
-        }
-        if (!found) {
-            printf("There's no participant with that username. Try again or type 0 to cancel.\n");
-            scanf(" ");
-            gets(login_username);
-        }
-    }
-
-    // if the login hasn't been canceled, it continues
-    if (strcmp(login_username, "0") != 0) {
-        int current_user = login_id; // the index used to refer to the current user's field in the participants array
-
-        printf("Type your password:\n");
-        scanf(" ");
-        gets(login_password);
-
-        // checking if the password is correct or the login is cancelled
-        while (strcmp(login_password, participants[current_user].password) != 0 && strcmp(login_password, "0") != 0) {
-            printf("Wrong password! Try again, or type 0 to cancel\n");
-            scanf(" ");
-            gets(login_password);
-        }
-        if (strcmp(login_password, participants[current_user].password) == 0) {
-            // the user proceeds to do their participant activities
-            participantActivities(current_user);
-        }
+    if(checkPassword(login_username, login_password)) {
+        // the user proceeds to do their participant activities
+        participantActivities(current_user);
     }
 }
 
@@ -274,19 +247,28 @@ void updateParticipant(int current_user) {
             }
             case 3: {
                 // updating the user's password
+                char old_password[25];
+                char new_password[25];
+                printf("Type your old password:\n");
+
+                // seek to end of input buffer
+                fseek(stdin, 0, SEEK_END);
+
+                scanf("%24s", old_password);
+                gets(old_password);
+
                 printf("Type your new password:\n");
-                scanf(" ");
-                gets(participants[current_user].password);
 
-                while (strlen(participants[current_user].password) < 2 || strlen(participants[current_user].password) > 25) {
-                    // data validation
-                    printf("The password should have between 2 and 25 characters. Try again.\n");
-                    scanf(" ");
-                    gets(participants[current_user].password);
+                // seek to end of input buffer
+                fseek(stdin, 0, SEEK_END);
+
+                scanf("%24s", new_password);
+                gets(new_password);
+
+                if(changePassword(participants[current_user].username, old_password, new_password) == 0) {
+                    // the user is prompted to choose again
+                    printf("Password successfully updated!\n");
                 }
-
-                // the user is prompted to choose again
-                printf("Password successfully updated!\n");
                 printf("1 - full name\n2 - username\n3 - password\n4 - gift preferences\n");
                 printf("If there's anything else you'd like to edit type 1, 2, 3 or 4 to edit one of the above, or 5 to exit:\n");
                 break;

@@ -10,10 +10,12 @@
 #include <stdlib.h>
 #include <time.h>
 
-#include "../../PasswordManager/PasswordManager.h"
 
 // corresponding header
 #include "AdminInteraction.h"
+
+// relevant headers
+#include "../../PasswordManager/PasswordManager.h"
 
 // login using the established admin password
 void adminLogin() {
