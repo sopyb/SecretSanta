@@ -9,6 +9,9 @@
 // local includes
 #include "DataStore/DataStore.h"
 #include "PasswordManager/PasswordManager.h"
+#include "Interaction/Admin/AdminInteraction.h"
+#include "Interaction/User/UserInteraction.h"
+#include "Interaction/GeneralInteraction.h"
 #include "colors.h"
 
 // Constants
