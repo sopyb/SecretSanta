@@ -1,6 +1,0 @@
-#ifndef USER_INTERFACE_LIBRARY_H
-#define USER_INTERFACE_LIBRARY_H
-
-void hello(void);
-
-#endif //USER_INTERFACE_LIBRARY_H
