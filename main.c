@@ -5,7 +5,6 @@
 
 int main()
 {
-    scanf("");
     readVitalData();
     startUp();
     return 0;

@@ -21,7 +21,7 @@ const char participant_path[] = "./data/participants/";
 
 // read the data from the data file
 void readVitalData() {
-    printf("Please wait for the data to load...\n");
+    // printf("Please wait for the data to load...\n");
     // make required folder if it doesn't exist
 #if defined(_WIN32) // if windows compile
     mkdir("./data");
